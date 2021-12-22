@@ -1,18 +1,10 @@
 #include "push_swap.h"
-void	del (int content)
+void	push (t_list **lst1, t_list **lst2)
 {
-	int *a;
+	t_list *top;
 
-	a = &content;
-	*a = 0;
-}
-void	push (t_list **lst1, t_list *lst2)
-{
-	if (*lst1 && lst2)
-	{
-		lst2->next = *lst1;
-		*lst1 = lst2;
-	}
-	else
-		*lst1 = lst2;
+	top = (*lst2);
+	*lst2 = (*lst2)->next;
+	top->next = NULL;
+	ft_lstadd_front (lst1 ,top);
 }
