@@ -3,8 +3,11 @@ void	push (t_list **lst1, t_list **lst2)
 {
 	t_list *top;
 
-	top = (*lst2);
-	*lst2 = (*lst2)->next;
-	top->next = NULL;
-	ft_lstadd_front (lst1 ,top);
+	if (*lst2)
+	{
+		top = (*lst2);
+		*lst2 = (*lst2)->next;
+		top->next = NULL;
+		ft_lstadd_front (lst1 ,top);
+	}
 }
