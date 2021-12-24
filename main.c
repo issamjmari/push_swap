@@ -2,25 +2,23 @@
 
 void	handle_3 (t_list *a)
 {
-	if (a->content > a->next->content
-	&& a->content > a->next->next->content)
-	{
-		rrotate (&a);
-		swaplst (a->next);
-	}
-	else if (a->content == a->next->content
-	&& a->content > a->next->next->content)
-		rrotate (&a);
-	else if (a->content == a->next->next->content
-	&& a->content > a->next->content)
-		swaplst (a);
+	if (a->content < a->next->content
+	&& a->content < a->next->next->content)
+		swaplst (&a->next);
+	else if (a->content > a->next->content
+	&& a->content < a->next->next->content)
+		swaplst (&a);
 	else if (a->content < a->next->content
 	&& a->content > a->next->next->content)
 		rrotate (&a);
-	while (a)
+	else if (a->content > a->next->content
+	&& a->next->content < a->next->next->content)
+		rotate (&a);
+	else if (a->content > a->next->content
+	&& a->next->content > a->next->next->content)
 	{
-		printf ("%d\n", a->content);
-		a = a->next;
+		swaplst (&a->next);
+		rotate (&a);
 	}
 }
 
@@ -40,6 +38,11 @@ int	main(int ac, char **av)
 		i++;
 	}
 	size = ft_lstsize (a);
-	if (size <= 3)
+	if (size == 2)
+	{
+		if (a->content > a->next->content)
+			swaplst (&a);
+	}
+	if (size == 3)
 		handle_3(a);
 }
