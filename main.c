@@ -1,5 +1,31 @@
 #include "push_swap.h"
 
+void	check (char **av)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	while (av[i])
+	{
+		j = 0;
+		if (ft_atoi(av[i]) == -10)
+		{
+			write (2, "Error\n", 6);
+			exit (1);
+		}
+		while (j != i)
+		{
+			if (ft_atoi(av[i]) == ft_atoi(av[j]))
+			{
+				write (2, "Error\n", 6);
+				exit (1);
+			}
+			j++;
+		}
+		i++;
+	}
+}
 void	handle_3 (t_list *a)
 {
 	if (a->content < a->next->content
@@ -31,6 +57,7 @@ int	main(int ac, char **av)
 
 	i = 2;
 	b = NULL;
+	check (&av[1]);
 	a = ft_lstnew (ft_atoi(av[1]));
 	while (av[i])
 	{
@@ -39,10 +66,8 @@ int	main(int ac, char **av)
 	}
 	size = ft_lstsize (a);
 	if (size == 2)
-	{
 		if (a->content > a->next->content)
 			swaplst (&a);
-	}
 	if (size == 3)
 		handle_3(a);
 }
