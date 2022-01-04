@@ -1,4 +1,5 @@
 #include "push_swap.h"
+
 void	swaplst (t_list **lst)
 {
 	int size;
@@ -11,6 +12,7 @@ void	swaplst (t_list **lst)
 		(*lst)->next->content = (*lst)->content;
 		(*lst)->content = temp;
 	}
+	write (1, "sa\n", 3);
 }
 void	swapboth (t_list **lst1, t_list **lst2)
 {
@@ -25,4 +27,5 @@ void	swapboth (t_list **lst1, t_list **lst2)
 		swaplst (lst1);
 	if (size2 >= 2)
 		swaplst (lst2);
+	write (1, "ss\n", 3);
 }

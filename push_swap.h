@@ -6,4 +6,6 @@ void	swaplst (t_list **lst);
 void	push (t_list **lst1, t_list **lst2);
 void	swapboth (t_list **lst1, t_list **lst2);
 void	rrotate (t_list **lst);
+void	swapdiff (t_list **a, t_list **b);
+void	countsort (int *n, int size);
 #endif

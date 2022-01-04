@@ -16,7 +16,8 @@ void	rotate (t_list **lst)
 		(*lst) = (*lst)->next;
 	}
 	(*lst)->content = current;
-	*lst = head;	
+	*lst = head;
+	write (1, "ra\n", 3);
 }
 void	rrotate(t_list **lst)
 {
@@ -40,4 +41,5 @@ void	rrotate(t_list **lst)
     }
 	head->content = lastcon;
 	*lst = head;
+	write (1, "rra\n", 3);
 }

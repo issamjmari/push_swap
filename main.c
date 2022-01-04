@@ -1,5 +1,6 @@
 #include "push_swap.h"
 
+
 void	check (char **av)
 {
 	int	i;
@@ -9,7 +10,7 @@ void	check (char **av)
 	while (av[i])
 	{
 		j = 0;
-		if (ft_atoi(av[i]) == -10)
+		if (ft_strncmp("-10", av[i], 3) != 0 && ft_atoi(av[i]) == -10)
 		{
 			write (2, "Error\n", 6);
 			exit (1);
@@ -26,11 +27,37 @@ void	check (char **av)
 		i++;
 	}
 }
+
+void handle_4 (t_list *a)
+{
+	if (a->content > a->next->content)
+		swaplst (&a);
+	if (a->next->next->content > a->next->next->next->content)
+	{
+		rrotate (&a);
+		rrotate (&a);
+		swaplst (&a);
+		rotate (&a);
+		rotate (&a);
+	}
+	if (a->content > a->next->next->content)
+	{
+		rotate (&a);
+		rotate (&a);
+	}
+	//if (a->next->content > a->next->next->next->content)
+	// 	swapdiff (&a->next, &a->next->next->next);
+	// if (a->next->content > a->next->next->content)
+	// 	swapdiff (&a->next, &a->next->next);
+}
 void	handle_3 (t_list *a)
 {
 	if (a->content < a->next->content
 	&& a->content < a->next->next->content)
-		swaplst (&a->next);
+	{
+		swaplst (&a);
+		rotate (&a);
+	}
 	else if (a->content > a->next->content
 	&& a->content < a->next->next->content)
 		swaplst (&a);
@@ -43,8 +70,8 @@ void	handle_3 (t_list *a)
 	else if (a->content > a->next->content
 	&& a->next->content > a->next->next->content)
 	{
-		swaplst (&a->next);
-		rotate (&a);
+		swaplst (&a);
+		rrotate (&a);
 	}
 }
 
@@ -69,5 +96,12 @@ int	main(int ac, char **av)
 		if (a->content > a->next->content)
 			swaplst (&a);
 	if (size == 3)
+	{
+		if (a->content < a->next->content
+		&& a->next->content < a->next->next->content)
+			return 0;
 		handle_3(a);
+	}
+	if (size == 4)
+		handle_4(a);
 }
