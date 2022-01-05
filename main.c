@@ -31,69 +31,67 @@ void	check (char **av)
 void	handle_3 (t_list *a)
 {
 	if (a->content < a->next->content
+	&& a->next->content < a->next->next->content)
+		return ;
+	if (a->content < a->next->content
 	&& a->content < a->next->next->content)
 	{
-		swaplst (&a);
-		rotate (&a);
+		swapa (&a);
+		rotatea (&a);
 	}
 	else if (a->content > a->next->content
 	&& a->content < a->next->next->content)
-		swaplst (&a);
+		swapa (&a);
 	else if (a->content < a->next->content
 	&& a->content > a->next->next->content)
-		rrotate (&a);
+		rrotatea (&a);
 	else if (a->content > a->next->content
 	&& a->next->content < a->next->next->content)
-		rotate (&a);
+		rotatea (&a);
 	else if (a->content > a->next->content
 	&& a->next->content > a->next->next->content)
 	{
-		swaplst (&a);
-		rrotate (&a);
+		swapa (&a);
+		rrotatea (&a);
 	}
 }
 void	handle_4 (t_list *a, t_list *b)
 {
-	push (&b, &a);
+	pushb (&b, &a);
 	handle_3 (a);
-	push (&a, &b);
+	pusha (&a, &b);
 	if (a->content > a->next->content
 	&& a->content > a->next->next->content
 	&& a->content > a->next->next->next->content)
-		rotate (&a);
+		rotatea (&a);
 	else if (a->content > a->next->content
 	&& a->content < a->next->next->content
 	&& a->content < a->next->next->next->content)
-		swaplst (&a);
+		swapa (&a);
 	else if (a->content > a->next->content
 	&& a->content > a->next->next->content
 	&& a->content < a->next->next->next->content)
 	{
-		rrotate (&a);
-		swaplst (&a);
-		rotate (&a);
-		rotate (&a);
+		rrotatea (&a);
+		swapa (&a);
+		rotatea (&a);
+		rotatea (&a);
 	}
 }
 void handle_5 (t_list *a, t_list *b)
 {
-	push(&b, &a);
+	pushb(&b, &a);
 	handle_4 (a, b);
-	push(&a, &b);
-	if (a->content > a->next->content
-	&& a->content > a->next->next->content
-	&& a->content > a->next->next->next->content
-	&& a->content > a->next->next->next->next->content)
-		rotate (&a);
-	if (a->content > a->next->content
-	&& a->content > a->next->next->content
-	&& a->content > a->next->next->next->content
-	&& a->content < a->next->next->next->next->content)
+	pusha(&a, &b);
+	if (a->content > a->next->content)
+		swapa (&a);
+	pushb(&b, &a);
+	handle_4 (a, b);
+	pusha(&a, &b);
+		while (a)
 	{
-		rrotate (&a);
-		swaplst (&a);
-		rotate (&a);
-		rotate (&a);
+		printf ("%d\n", a->content);
+		a = a->next;
 	}
 }
 
@@ -116,7 +114,7 @@ int	main(int ac, char **av)
 	size = ft_lstsize (a);
 	if (size == 2)
 		if (a->content > a->next->content)
-			swaplst (&a);
+			swapa (&a);
 	if (size == 3)
 	{
 		if (a->content < a->next->content

@@ -1,5 +1,6 @@
 #include "push_swap.h"
-void	rotate (t_list **lst)
+
+void	rotateb (t_list **lst)
 {
 	int	current;
 	t_list	*last;
@@ -17,9 +18,9 @@ void	rotate (t_list **lst)
 	}
 	(*lst)->content = current;
 	*lst = head;
-	write (1, "ra\n", 3);
+	write (1, "rb\n", 3);
 }
-void	rrotate(t_list **lst)
+void	rrotateb(t_list **lst)
 {
 	int		prevcon;
 	int		lastcon;
@@ -41,5 +42,49 @@ void	rrotate(t_list **lst)
     }
 	head->content = lastcon;
 	*lst = head;
-	write (1, "rra\n", 3);
+	write (1, "rrb\n", 4);
+}
+void	rotatea (t_list **lst)
+{
+	int	current;
+	t_list	*last;
+	t_list	*head;
+
+	current = (*lst)->content;
+	head = *lst;
+	last = ft_lstlast (*lst);
+	(*lst)->content = (*lst)->next->content;
+	*lst = (*lst)->next;
+	while ((*lst)->next)
+	{
+		(*lst)->content = (*lst)->next->content;
+		(*lst) = (*lst)->next;
+	}
+	(*lst)->content = current;
+	*lst = head;
+	write (1, "ra\n", 3);
+}
+void	rrotatea(t_list **lst)
+{
+	int		prevcon;
+	int		lastcon;
+	int		temp;
+	t_list	*last;
+	t_list	*head;
+
+	last = ft_lstlast (*lst);
+	lastcon = last->content;
+	prevcon = (*lst)->content;
+	head = (*lst);
+    (*lst) = (*lst)->next;
+    while (*lst) 
+	{
+        temp = (*lst)->content;
+        (*lst)->content = prevcon;
+        prevcon = temp;
+        (*lst) = (*lst)->next;
+    }
+	head->content = lastcon;
+	*lst = head;
+	write (1, "rra\n", 4);
 }
