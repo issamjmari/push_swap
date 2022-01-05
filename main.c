@@ -28,28 +28,6 @@ void	check (char **av)
 	}
 }
 
-void handle_4 (t_list *a)
-{
-	if (a->content > a->next->content)
-		swaplst (&a);
-	if (a->next->next->content > a->next->next->next->content)
-	{
-		rrotate (&a);
-		rrotate (&a);
-		swaplst (&a);
-		rotate (&a);
-		rotate (&a);
-	}
-	if (a->content > a->next->next->content)
-	{
-		rotate (&a);
-		rotate (&a);
-	}
-	//if (a->next->content > a->next->next->next->content)
-	// 	swapdiff (&a->next, &a->next->next->next);
-	// if (a->next->content > a->next->next->content)
-	// 	swapdiff (&a->next, &a->next->next);
-}
 void	handle_3 (t_list *a)
 {
 	if (a->content < a->next->content
@@ -72,6 +50,50 @@ void	handle_3 (t_list *a)
 	{
 		swaplst (&a);
 		rrotate (&a);
+	}
+}
+void	handle_4 (t_list *a, t_list *b)
+{
+	push (&b, &a);
+	handle_3 (a);
+	push (&a, &b);
+	if (a->content > a->next->content
+	&& a->content > a->next->next->content
+	&& a->content > a->next->next->next->content)
+		rotate (&a);
+	else if (a->content > a->next->content
+	&& a->content < a->next->next->content
+	&& a->content < a->next->next->next->content)
+		swaplst (&a);
+	else if (a->content > a->next->content
+	&& a->content > a->next->next->content
+	&& a->content < a->next->next->next->content)
+	{
+		rrotate (&a);
+		swaplst (&a);
+		rotate (&a);
+		rotate (&a);
+	}
+}
+void handle_5 (t_list *a, t_list *b)
+{
+	push(&b, &a);
+	handle_4 (a, b);
+	push(&a, &b);
+	if (a->content > a->next->content
+	&& a->content > a->next->next->content
+	&& a->content > a->next->next->next->content
+	&& a->content > a->next->next->next->next->content)
+		rotate (&a);
+	if (a->content > a->next->content
+	&& a->content > a->next->next->content
+	&& a->content > a->next->next->next->content
+	&& a->content < a->next->next->next->next->content)
+	{
+		rrotate (&a);
+		swaplst (&a);
+		rotate (&a);
+		rotate (&a);
 	}
 }
 
@@ -103,5 +125,7 @@ int	main(int ac, char **av)
 		handle_3(a);
 	}
 	if (size == 4)
-		handle_4(a);
+		handle_4 (a, b);
+	if (size == 5)
+		handle_5(a, b);
 }
