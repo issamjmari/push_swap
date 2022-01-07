@@ -55,44 +55,28 @@ void	handle_3 (t_list *a)
 		rrotatea (&a);
 	}
 }
-void	handle_4 (t_list *a, t_list *b)
+int	checksmaller (t_list *a)
 {
-	pushb (&b, &a);
-	handle_3 (a);
-	pusha (&a, &b);
-	if (a->content > a->next->content
-	&& a->content > a->next->next->content
-	&& a->content > a->next->next->next->content)
-		rotatea (&a);
-	else if (a->content > a->next->content
-	&& a->content < a->next->next->content
-	&& a->content < a->next->next->next->content)
-		swapa (&a);
-	else if (a->content > a->next->content
-	&& a->content > a->next->next->content
-	&& a->content < a->next->next->next->content)
+	int smaller;
+
+	smaller = a->content;
+	while (a->next)
 	{
-		rrotatea (&a);
-		swapa (&a);
-		rotatea (&a);
-		rotatea (&a);
+		if (a->next->content < smaller)
+			smaller = a->next->content;
+		a = a->next;
 	}
+	return (smaller);
 }
 void handle_5 (t_list *a, t_list *b)
 {
-	pushb(&b, &a);
-	handle_4 (a, b);
-	pusha(&a, &b);
-	if (a->content > a->next->content)
-		swapa (&a);
-	pushb(&b, &a);
-	handle_4 (a, b);
-	pusha(&a, &b);
-		while (a)
-	{
-		printf ("%d\n", a->content);
-		a = a->next;
-	}
+	int		smaller;
+	t_list	*pos;
+	t_list	*head;
+
+	head = a;
+	checksmaller (a);
+
 }
 
 int	main(int ac, char **av)
@@ -117,13 +101,10 @@ int	main(int ac, char **av)
 			swapa (&a);
 	if (size == 3)
 	{
-		if (a->content < a->next->content
-		&& a->next->content < a->next->next->content)
-			return 0;
 		handle_3(a);
 	}
-	if (size == 4)
-		handle_4 (a, b);
 	if (size == 5)
 		handle_5(a, b);
+	if (size > 5)
+		sort (a, b);
 }

@@ -1,6 +1,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 #include "Libft/libft.h"
+int		checksmaller (t_list *a);
 void	rotatea(t_list **lst);
 void	rotateb(t_list **lst);
 void	swapa (t_list **lst);
@@ -11,4 +12,5 @@ void	swapboth (t_list **lst1, t_list **lst2);
 void	rrotatea (t_list **lst);
 void	rrotatea (t_list **lst);
 void	countsort (int *n, int size);
+void 	sort (t_list *a, t_list *b);
 #endif
