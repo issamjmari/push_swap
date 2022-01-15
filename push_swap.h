@@ -1,8 +1,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "Libft/libft.h"
-
+# include "Libft/libft.h" 
 void	sort1 (t_list *a, t_list *b);
 int     smallest_pos(t_list *stack);
 void	rotatea(t_list **lst);

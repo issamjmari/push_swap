@@ -1,57 +1,54 @@
 #include "push_swap.h"
 
-t_list	*fillwithmax (t_list **a, int smallest, int size, t_list **b)
+int	current_pos (int size, int current, t_list *dup)
 {
-	static int	firsttime;
-	int i;
-	t_list	*head;
+	int pos;
 
-	i = 0;
-	head = *a;
-	if (!firsttime)
+	pos = 0;
+	while (dup)
 	{
-		while ((*a)->content != 2147483647)
-			(*a) = (*a)->next;
-		
+		if (dup->content >= current)
+			pos++;
+		dup = dup->next;
 	}
-	*a = head;
-	while (i != smallest)
-	{
-		*a = (*a)->next;
-		i++;
-	}
-	(*a)->content = 2147483647;
-	*a = head;
+	pos = size - pos;
+	return (pos);
 }
 
-void	indexing (t_list *a, t_list *b)
+t_list	*ft_lstdup (t_list *a)
 {
-	int smallest;
-	int *arr;
-	int	size;
-	int	i;
+	t_list	*dup;
 	t_list	*head;
 
-	i = 0;
-	head = a;
-	size = ft_lstsize (a);
-	arr = (int *) malloc (size * sizeof (int));
-	while (i < size)
-	{
-		smallest = smallest_pos (a);
-		arr[smallest] = i;
-		fillwithmax (&a, smallest, size);
-		i++;
- 	}
-	i = 0;
+	dup = ft_lstnew (a->content);
+	a = a->next;
 	while (a)
 	{
-		a->content = arr[i];
+		ft_lstadd_back (&dup, ft_lstnew(a->content));
 		a = a->next;
-		i++;
 	}
-	a = head;
-	print_stack(a);
+	return (dup);
+}
+
+void	indexing (t_list *a)
+{
+	t_list	*ahead;
+	t_list	*dup;
+	t_list	*duphead;
+	int		size;
+
+	dup = ft_lstdup (a);
+	size = ft_lstsize (dup);
+	duphead = dup;
+	ahead = a;
+	while (dup)
+	{
+		a->content = current_pos (size, dup->content, duphead);
+		dup = dup->next;
+		a = a->next;
+	}
+	a = ahead;
+	print_stack (a);
 }
 
 int	getpos (t_list *head, int a)
@@ -108,4 +105,5 @@ void	sort1 (t_list *a, t_list *b)
 	int mid;
 
 	indexing (a);
+	
 }
