@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-
 void	check (char **av)
 {
 	int	i;
@@ -55,28 +54,64 @@ void	handle_3 (t_list *a)
 		rrotatea (&a);
 	}
 }
-int	checksmaller (t_list *a)
+void	bringfront (t_list **stack, int smallest)
 {
-	int smaller;
-
-	smaller = a->content;
-	while (a->next)
+	while (smallest)
 	{
-		if (a->next->content < smaller)
-			smaller = a->next->content;
-		a = a->next;
+		rotatea(stack);
+		smallest--;
 	}
-	return (smaller);
 }
-void handle_5 (t_list *a, t_list *b)
+int	smallest_pos(t_list *stack)
 {
-	int		smaller;
-	t_list	*pos;
-	t_list	*head;
+	int	position;
+	int	smallest;
+	int ret;
 
-	head = a;
-	checksmaller (a);
+	position = 0;
+	ret = 0;
+	smallest = stack->content;
+	while (stack)
+	{
+		if (stack->content < smallest) 
+		{
+			smallest = stack->content;
+			ret = position;
+		}
+		position++;
+		stack = stack->next;
+	}
+	return (ret);
+}
+void	handle_5n4 (t_list *a, t_list *b, int size)
+{
+	int smallest;
 
+	smallest = smallest_pos (a);
+	bringfront (&a, smallest);
+	pushb (&b, &a);
+	if (size == 5)
+	{
+		smallest = smallest_pos (a);
+		bringfront (&a, smallest);
+		pushb (&b, &a);
+	}
+	handle_3 (a);
+	pusha(&a, &b);
+	if (size == 5)
+	{
+		pusha(&a, &b);
+		if (a->content > a->next->content)
+			swapa (&a);
+	}
+}
+void    print_stack(t_list *stack)
+{
+	while (stack)
+	{
+		printf ("%d\n", stack->content);
+		stack = stack->next;
+	}
 }
 
 int	main(int ac, char **av)
@@ -96,15 +131,15 @@ int	main(int ac, char **av)
 		i++;
 	}
 	size = ft_lstsize (a);
-	if (size == 2)
-		if (a->content > a->next->content)
-			swapa (&a);
-	if (size == 3)
-	{
-		handle_3(a);
-	}
-	if (size == 5)
-		handle_5(a, b);
+	// if (size == 2)
+	// 	if (a->content > a->next->content)
+	// 		swapa (&a);
+	// if (size == 3)
+	// {
+	// 	handle_3(a);
+	// }
+	if (size == 5 || size == 4)
+		handle_5n4(a, b, size);
 	if (size > 5)
-		sort (a, b);
+		sort1 (a, b);
 }

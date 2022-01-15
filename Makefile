@@ -1,2 +1,2 @@
 all :
-	gcc main.c Libft/libft.a rotate.c pushto.c swapa.c sort.c
+	gcc main.c pushto.c rotate.c swapa.c sort.c libft.a
