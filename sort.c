@@ -86,10 +86,11 @@ void	push_elements (t_list **a, t_list **b, int size)
 
 	i = 0;
 	pushed = ((size - 5) / 3) + 1;
-	med = (max + min) / 2;
 	while (i < pushed)
 	{
 		min = smallest_pos (*a);
+		size = ft_lstsize(*a);
+		med = size / 2;
 		if (min <= med) 
 		{
 			while (min)
@@ -98,7 +99,7 @@ void	push_elements (t_list **a, t_list **b, int size)
 				min--;
 			}
 		}
-		else if (min >= med)
+		else if (min > med)
 		{
 			while (min != size)
 			{
@@ -120,12 +121,9 @@ void	sort1 (t_list *a, t_list *b)
 
 	indexing (a);
 	size = ft_lstsize(a);
-	print_stack (a);
-	printf ("--\n-----BEFORE---\n--------\n");
 	while (size > 5)
 	{
 		push_elements (&a, &b, size);
 		size = ft_lstsize(a);
 	}
-	print_stack (a);
 }
