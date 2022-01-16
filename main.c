@@ -64,24 +64,16 @@ void	bringfront (t_list **stack, int smallest)
 }
 int	smallest_pos(t_list *stack)
 {
-	int	position;
 	int	smallest;
-	int ret;
 
-	position = 0;
-	ret = 0;
 	smallest = stack->content;
 	while (stack)
 	{
 		if (stack->content < smallest) 
-		{
 			smallest = stack->content;
-			ret = position;
-		}
-		position++;
 		stack = stack->next;
 	}
-	return (ret);
+	return (smallest);
 }
 void	handle_5n4 (t_list *a, t_list *b, int size)
 {

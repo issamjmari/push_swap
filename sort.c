@@ -1,5 +1,20 @@
 #include "push_swap.h"
 
+int	set_pos (t_list *a, int min, int max)
+{
+	int	pos;
+
+	pos = 0;
+	while (a)
+	{
+		if (a->content >= min && a->content <= max)
+		{
+			printf ("-----%d\n", pos);
+			return (pos);
+		}
+		pos++;
+	}
+}
 int	current_pos (int size, int current, t_list *dup)
 {
 	int pos;
@@ -76,38 +91,44 @@ void	sort(t_list *a, t_list *b, int size)
 		pushb(&b, &a);
 }
 
-void	push_elements (t_list **a, t_list **b, int size)
+void	push_elements (t_list **a, t_list **b)
 {
 	int min;
 	int max;
 	int pushed;
 	int med;
-	int	i;
+	int size;
+	int from_set;
+	int i;
 
 	i = 0;
+	size = ft_lstsize(*a);
 	pushed = ((size - 5) / 3) + 1;
+	min = smallest_pos (*a);
+	max = min + (pushed - 1);
 	while (i < pushed)
 	{
-		min = smallest_pos (*a);
-		size = ft_lstsize(*a);
 		med = size / 2;
-		if (min <= med) 
+		from_set = set_pos(*a, min, max);
+		printf ("SETTTT%d\n", from_set);
+		if (from_set <= med)
 		{
-			while (min)
+			while (from_set)
 			{
 				rotatea(a);
-				min--;
+				from_set--;
 			}
 		}
-		else if (min > med)
+		else if (from_set > med)
 		{
-			while (min != size)
+			while (from_set != size)
 			{
 				rrotatea (a);
-				min++;
+				from_set++;
 			}
 		}
 		pushb (b, a);
+		size = ft_lstsize(*a);
 		i++;
 	}
 }
@@ -123,7 +144,7 @@ void	sort1 (t_list *a, t_list *b)
 	size = ft_lstsize(a);
 	while (size > 5)
 	{
-		push_elements (&a, &b, size);
+		push_elements (&a, &b);
 		size = ft_lstsize(a);
 	}
 }
