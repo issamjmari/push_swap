@@ -62,7 +62,29 @@ void	bringfront (t_list **stack, int smallest)
 		smallest--;
 	}
 }
+
 int	smallest_pos(t_list *stack)
+{
+	int	position;
+	int	smallest;
+	int ret;
+
+	position = 0;
+	ret = 0;
+	smallest = stack->content;
+	while (stack)
+	{
+		if (stack->content < smallest) 
+		{
+			smallest = stack->content;
+			ret = position;
+		}
+		position++;
+		stack = stack->next;
+	}
+	return (ret);
+}
+int	smallest(t_list *stack)
 {
 	int	smallest;
 
@@ -75,26 +97,26 @@ int	smallest_pos(t_list *stack)
 	}
 	return (smallest);
 }
-void	handle_5n4 (t_list *a, t_list *b, int size)
+void	handle_5n4 (t_list **a, t_list **b, int size)
 {
 	int smallest;
 
-	smallest = smallest_pos (a);
-	bringfront (&a, smallest);
-	pushb (&b, &a);
+	smallest = smallest_pos (*a);
+	bringfront (a, smallest);
+	pushb (b, a);
 	if (size == 5)
 	{
-		smallest = smallest_pos (a);
-		bringfront (&a, smallest);
-		pushb (&b, &a);
+		smallest = smallest_pos (*a);
+		bringfront (a, smallest);
+		pushb (b, a);
 	}
-	handle_3 (a);
-	pusha(&a, &b);
+	handle_3 (*a);
+	pusha(a, b);
 	if (size == 5)
 	{
-		pusha(&a, &b);
-		if (a->content > a->next->content)
-			swapa (&a);
+		pusha(a, b);
+		if ((*a)->content > (*a)->next->content)
+			swapa (a);
 	}
 }
 void    print_stack(t_list *stack)
@@ -131,7 +153,7 @@ int	main(int ac, char **av)
 	// 	handle_3(a);
 	// }
 	if (size == 5 || size == 4)
-		handle_5n4(a, b, size);
-	if (size > 5)
+		handle_5n4(&a, &b, size);
+	else if (size > 5)
 		sort1 (a, b);
 }

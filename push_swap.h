@@ -15,7 +15,7 @@ void	rrotatea (t_list **lst);
 void	rrotatea (t_list **lst);
 void	countsort (int *n, int size);
 void 	sort (t_list *a, t_list *b, int size);
-
+void	handle_5n4 (t_list **a, t_list **b, int size);
 void    print_stack(t_list *stack);
-
+int	smallest(t_list *stack);
 #endif
