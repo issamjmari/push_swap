@@ -8,11 +8,9 @@ int	set_pos (t_list *a, int min, int max)
 	while (a)
 	{
 		if (a->content >= min && a->content <= max)
-		{
-			printf ("-----%d\n", pos);
 			return (pos);
-		}
 		pos++;
+		a = a->next;
 	}
 }
 int	current_pos (int size, int current, t_list *dup)
@@ -93,24 +91,31 @@ void	sort(t_list *a, t_list *b, int size)
 
 void	push_elements (t_list **a, t_list **b)
 {
+	static int t;
+	static int pu;
 	int min;
 	int max;
 	int pushed;
 	int med;
+	int elements_med;
 	int size;
 	int from_set;
 	int i;
 
+	t = 0;
 	i = 0;
 	size = ft_lstsize(*a);
 	pushed = ((size - 5) / 3) + 1;
 	min = smallest_pos (*a);
 	max = min + (pushed - 1);
+	elements_med = (max + min) / 2;
 	while (i < pushed)
 	{
 		med = size / 2;
 		from_set = set_pos(*a, min, max);
-		printf ("SETTTT%d\n", from_set);
+		// printf ("\n--------aaaaa[%d][%d]--------\n", pu, t);
+		// print_stack (*a);
+		// printf ("\n--------aaaaa[%d][%d]--------\n", pu, t);
 		if (from_set <= med)
 		{
 			while (from_set)
@@ -128,9 +133,17 @@ void	push_elements (t_list **a, t_list **b)
 			}
 		}
 		pushb (b, a);
+		if ((*b)->content < elements_med
+		&& ft_lstsize(*b) >= 2)
+			rotateb (b);
+		// printf ("\n--------bbbbb[%d][%d]--------\n", pu, t);
+		// print_stack (*b);
+		// printf ("\n--------bbbbb[%d][%d]--------\n", pu, t);
 		size = ft_lstsize(*a);
 		i++;
+		t++;
 	}
+	pu++;
 }
 
 void	sort1 (t_list *a, t_list *b)
@@ -147,4 +160,5 @@ void	sort1 (t_list *a, t_list *b)
 		push_elements (&a, &b);
 		size = ft_lstsize(a);
 	}
+	print_stack (b);
 }
