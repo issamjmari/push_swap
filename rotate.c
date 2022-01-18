@@ -18,7 +18,7 @@ void	rotateb (t_list **lst)
 	}
 	(*lst)->content = current;
 	*lst = head;
-	// write (1, "rb\n", 3);
+	write (1, "rb\n", 3);
 }
 void	rrotateb(t_list **lst)
 {
@@ -42,7 +42,7 @@ void	rrotateb(t_list **lst)
     }
 	head->content = lastcon;
 	*lst = head;
-	// write (1, "rrb\n", 4);
+	write (1, "rrb\n", 4);
 }
 void	rotatea (t_list **lst)
 {
@@ -62,7 +62,7 @@ void	rotatea (t_list **lst)
 	}
 	(*lst)->content = current;
 	*lst = head;
-	// write (1, "ra\n", 3);
+	write (1, "ra\n", 3);
 }
 void	rrotatea(t_list **lst)
 {
@@ -86,5 +86,5 @@ void	rrotatea(t_list **lst)
     }
 	head->content = lastcon;
 	*lst = head;
-	// write (1, "rra\n", 4);
+	write (1, "rra\n", 4);
 }

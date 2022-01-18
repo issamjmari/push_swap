@@ -17,5 +17,6 @@ void	countsort (int *n, int size);
 void 	sort (t_list *a, t_list *b, int size);
 void	handle_5n4 (t_list **a, t_list **b, int size);
 void    print_stack(t_list *stack);
-int	smallest(t_list *stack);
+int	    smallest(t_list *stack);
+void	bring_front_or_back (t_list **stack, int wanted, int size, int med);
 #endif
