@@ -6,6 +6,7 @@ void	sort1 (t_list *a, t_list *b);
 int     smallest_pos(t_list *stack);
 void	rotatea(t_list **lst);
 void	rotateb(t_list **lst);
+void	rrotateb(t_list **lst);
 void	swapa (t_list **lst);
 void	swapb (t_list **lst);
 void	pusha (t_list **lst1, t_list **lst2);

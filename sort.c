@@ -78,26 +78,6 @@ int	getpos (t_list *head, int a)
 	return 0;
 }
 
-int	notsorted (t_list *a)
-{
-	int sort;
-
-	sort = 1;
-	while (a)
-	{
-		if (a->content > a->next->content)
-		{
-			sort = 0;
-			break;
-		}
-		a = a->next;
-	}
-	if (!sort)
-		return (sort);
-	else
-		return (1);
-}
-
 t_list	*getlastnode (t_list *a)
 {
 	while (a)
@@ -213,7 +193,7 @@ void	push_elements (t_list **a, t_list **b)
 	i = 0;
 
 	size = ft_lstsize(*a);
-	pushed = ((size - 5) / 5) + 1;
+	pushed = ((size - 5) / 4) + 1;
 	min = smallest (*a);
 	max = min + (pushed - 1);
 	elements_med = (max + min) / 2;

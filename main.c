@@ -1,5 +1,26 @@
 #include "push_swap.h"
 
+int		is_int (char *str)
+{
+	int	i;
+	int negative;
+
+	i = 0;
+	negative = 0;
+	if (str[i] == '-')
+		i++;
+	if (ft_atoi(str) > 2147483647
+	|| ft_atoi(str) < -2147483648)
+		return 0;
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	check (char **av)
 {
 	int	i;
@@ -9,11 +30,6 @@ void	check (char **av)
 	while (av[i])
 	{
 		j = 0;
-		if (ft_strncmp("-10", av[i], 3) != 0 && ft_atoi(av[i]) == -10)
-		{
-			write (2, "Error\n", 6);
-			exit (1);
-		}
 		while (j != i)
 		{
 			if (ft_atoi(av[i]) == ft_atoi(av[j]))
@@ -22,6 +38,11 @@ void	check (char **av)
 				exit (1);
 			}
 			j++;
+		}
+		if (!is_int(av[i]))
+		{
+			write (2, "Error\n", 6);
+			exit (1);
 		}
 		i++;
 	}
@@ -156,15 +177,14 @@ int	main(int ac, char **av)
 		i++;
 	}
 	size = ft_lstsize (a);
-	// if (size == 2)
-	// 	if (a->content > a->next->content)
-	// 		swapa (&a);
-	// if (size == 3)
-	// {
-	// 	handle_3(a);
-	// }
+	if (size == 2)
+		if (a->content > a->next->content)
+			swapa (&a);
+	if (size == 3)
+		handle_3(a);
 	if (size == 5 || size == 4)
 		handle_5n4(&a, &b, size);
 	else if (size > 5)
 		sort1 (a, b);
+	// print_stack (a);
 }
