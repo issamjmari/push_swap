@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include "get_next_line/get_next_line.h"
 
 int		is_int (char *str)
 {
@@ -47,35 +48,57 @@ void	check (char **av)
 		i++;
 	}
 }
+
+void	check_if_sorted (t_list *a, t_list *b)
+{
+	int pos;
+
+	pos = 0;
+	// print_stack(a);
+	while (a)
+	{
+		if (a->next && a->content > a->next->content)
+		{
+			write (1, "KO\n", 3);
+			exit (1);
+		}
+		pos++;
+		a = a->next;
+	}
+	write (1, "OK\n", 3);
+}
 void    rx_instructions (t_list *a, t_list *b)
 {
+	int i;
     int     rd;
     char    *inst;
+	int 	count;
 
-    rd = read(0, inst, 5);
-    while (rd)
+	i = 0;
+    inst = get_next_line (0);
+    while (inst)
     {
         if (!strncmp(inst, "ra\n", 4))
             rotatea (&a);
         else if (!strncmp(inst, "rra\n", 4))
             rrotatea (&a);
         else if (!strncmp(inst, "rb\n", 4))
-            rotateb (&a);
+            rotateb (&b);
         else if (!strncmp(inst, "rrb\n", 4))
-            rrotateb (&a);
+            rrotateb (&b);
         else if (!strncmp(inst, "sa\n", 3))
             swapa (&a);
         else if (!strncmp(inst, "sb\n", 3))
-            swapb (&a);
+            swapb (&b);
         else if (!strncmp(inst, "pa\n", 3))
             pusha (&a, &b);
         else if (!strncmp(inst, "pb\n", 3))
-            pusha (&b, &a);
-        else if (!strncmp(inst, "pb\n", 3))
-            pusha (&b, &a);
+            pushb (&b, &a);
         else if (!strncmp(inst, "ss\n", 3))
             swapboth (&b, &a);
-        rd = read(0, inst, 5);
+		free (inst);
+        inst = get_next_line (0);
+		i++;
     }
 }
 
@@ -96,4 +119,6 @@ int	main(int ac, char **av)
 		i++;
 	}
     rx_instructions(a, b);
+	// print_stack(a);
+	check_if_sorted(a, b);
 }

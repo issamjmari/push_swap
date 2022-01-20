@@ -109,6 +109,28 @@ void	push_wanted (t_list **a, t_list **b, int wanted, int med)
 	pusha (a, b);
 }
 
+int		not_sorted (t_list *a)
+{
+	t_list	*head;
+	int pos;
+	int		sorted;
+
+	sorted = 1;
+	pos = 0;
+	head = a;
+	while (a->next)
+	{
+		if (a->content > a->next->content)
+		{
+			sorted = 0;
+			break;
+		}
+		pos++;
+		a = a->next;
+	}
+	return (sorted);
+}
+
 int		is_there (int content, t_list *b)
 {
 	while (b)
@@ -137,17 +159,12 @@ void	put_contentback (t_list **head, int lastcon)
 		*head = (*head)->next;
 	}
 }
-
-void	while_not_sorted (t_list *a)
+void    print_stack(t_list *stack)
 {
-	t_list	*head;
-
-	head = a;
-	while (a)
+	while (stack)
 	{
-		if (a->next && a->content > a->next->content)
-			rrotatea (&head);
-		a = a->next;
+		printf ("%d\n", stack->content);
+		stack = stack->next;
 	}
 }
 void	put_back (t_list **a, t_list **b, int lastcon)
@@ -201,6 +218,7 @@ void	push_elements (t_list **a, t_list **b)
 	{
 		med = size / 2;
 		from_set = set_pos(*a, min, max);
+		printf ("-------FROM_SET------- %d\n", from_set);
 		bring_front_or_back (a, from_set, size, med);
 		pushb (b, a);
 		if ((*b)->content < elements_med && ft_lstsize(*b) >= 2)
@@ -208,6 +226,8 @@ void	push_elements (t_list **a, t_list **b)
 		size = ft_lstsize(*a);
 		i++;
 	}
+	print_stack(*a);
+	printf ("SAFE\n");
 }
 
 t_list	*put1 (t_list *head)
@@ -238,8 +258,9 @@ void	sort1 (t_list *a, t_list *b)
 		size = ft_lstsize(a);
 	}
 	handle_5n4 (&a, &b, size);
+	print_stack(a);
 	lastdup = put1 (a);
 	put_back (&a, &b, lastdup->content);
-	while_not_sorted (a);
-	// print_stack (a);
+	while (!not_sorted(a))
+		rrotatea(&a);
 }

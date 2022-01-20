@@ -151,14 +151,6 @@ void	handle_5n4 (t_list **a, t_list **b, int size)
 			swapa (a);
 	}
 }
-void    print_stack(t_list *stack)
-{
-	while (stack)
-	{
-		printf ("%d\n", stack->content);
-		stack = stack->next;
-	}
-}
 
 int	main(int ac, char **av)
 {
