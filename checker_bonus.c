@@ -77,13 +77,8 @@ void	check_if_sorted (t_list *a, t_list *b)
 // }
 void    rx_instructions (t_list *a, t_list *b)
 {
-	int i;
-    int     rd;
     char    *inst;
-	int 	count;
-	int size = 0;
 
-	i = 0;
 	int fd = open ("ch.txt", O_RDWR);
     inst = get_next_line (0);
     while (inst)
@@ -108,17 +103,16 @@ void    rx_instructions (t_list *a, t_list *b)
             swapboth (&b, &a);
 		free (inst);
         inst = get_next_line (0);
-		i++;
     }
 }
-void    print_stack(t_list *stack)
-{
-	while (stack)
-	{
-		printf ("%d\n", stack->content);
-		stack = stack->next;
-	}
-}
+// void    print_stack(t_list *stack)
+// {
+// 	while (stack)
+// 	{
+// 		printf ("%d\n", stack->content);
+// 		stack = stack->next;
+// 	}
+// }
 int	main(int ac, char **av)
 {
 	t_list	*a;
@@ -136,6 +130,5 @@ int	main(int ac, char **av)
 		i++;
 	}
     rx_instructions(a, b);
-	print_stack(a);
 	check_if_sorted(a, b);
 }

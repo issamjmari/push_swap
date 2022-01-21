@@ -75,13 +75,19 @@ void	handle_3 (t_list *a)
 		rrotatea (&a);
 	}
 }
-void	bringb_front_or_back (t_list *stack, int wanted, int size, int med)
+void	bring_front_or_back (t_list *stack, int wanted, int size, char c)
 {
+	int	med;
+
+	med = size / 2;
 	if (wanted <= med)
 	{
 		while (wanted)
 		{
-			rotateb(&stack);
+			if (c == 'b')
+				rotateb(&stack);
+			else if (c == 'a')
+				rotatea(&stack);
 			wanted--;
 		}
 	}
@@ -89,26 +95,10 @@ void	bringb_front_or_back (t_list *stack, int wanted, int size, int med)
 	{
 		while (wanted != size)
 		{
-			rrotateb(&stack);
-			wanted++;
-		}
-	}
-}
-void	bringa_front_or_back (t_list *stack, int wanted, int size, int med)
-{
-	if (wanted <= med)
-	{
-		while (wanted)
-		{
-			rotatea(&stack);
-			wanted--;
-		}
-	}
-	else
-	{
-		while (wanted != size)
-		{
-			rrotatea(&stack);
+			if (c == 'b')
+				rrotateb(&stack);
+			else if (c == 'a')
+				rrotatea(&stack);
 			wanted++;
 		}
 	}
@@ -155,13 +145,13 @@ void	handle_5n4 (t_list **a, t_list **b)
 
 	smallest = smallest_pos (*a);
 	size = ft_lstsize (*a);
-	bringa_front_or_back (*a, smallest, size, size / 2);
+	bring_front_or_back (*a, smallest, size, 'a');
 	pushb (b, a);
 	if (size == 5)
 	{
 		size = ft_lstsize (*a);
 		smallest = smallest_pos (*a);
-		bringa_front_or_back (*a, smallest, size, size / 2);
+		bring_front_or_back (*a, smallest, size, 'a');
 		pushb (b, a);
 	}
 	handle_3 (*a);
@@ -199,5 +189,6 @@ int	main(int ac, char **av)
 	if (size == 5 || size == 4)
 		handle_5n4(&a, &b);
 	if (size > 5)
-		sort1 (a, b);
+		sort (a, b);
+	print_stack(a);
 }
