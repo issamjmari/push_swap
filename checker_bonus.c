@@ -67,41 +67,58 @@ void	check_if_sorted (t_list *a, t_list *b)
 	}
 	write (1, "OK\n", 3);
 }
+// void    print_stack(t_list *stack)
+// {
+// 	while (stack)
+// 	{
+// 		printf ("%d\n", stack->content);
+// 		stack = stack->next;
+// 	}
+// }
 void    rx_instructions (t_list *a, t_list *b)
 {
 	int i;
     int     rd;
     char    *inst;
 	int 	count;
+	int size = 0;
 
 	i = 0;
+	int fd = open ("ch.txt", O_RDWR);
     inst = get_next_line (0);
     while (inst)
     {
-        if (!strncmp(inst, "ra\n", 4))
+        if (!strncmp(inst, "ra\n", 2))
             rotatea (&a);
-        else if (!strncmp(inst, "rra\n", 4))
+        else if (!strncmp(inst, "rra\n", 3))
             rrotatea (&a);
-        else if (!strncmp(inst, "rb\n", 4))
+        else if (!strncmp(inst, "rb\n", 2))
             rotateb (&b);
-        else if (!strncmp(inst, "rrb\n", 4))
+        else if (!strncmp(inst, "rrb\n", 3))
             rrotateb (&b);
-        else if (!strncmp(inst, "sa\n", 3))
+        else if (!strncmp(inst, "sa\n", 2))
             swapa (&a);
-        else if (!strncmp(inst, "sb\n", 3))
+        else if (!strncmp(inst, "sb\n", 2))
             swapb (&b);
-        else if (!strncmp(inst, "pa\n", 3))
+        else if (!strncmp(inst, "pa\n", 2))
             pusha (&a, &b);
-        else if (!strncmp(inst, "pb\n", 3))
+        else if (!strncmp(inst, "pb\n", 2))
             pushb (&b, &a);
-        else if (!strncmp(inst, "ss\n", 3))
+        else if (!strncmp(inst, "ss\n", 2))
             swapboth (&b, &a);
 		free (inst);
         inst = get_next_line (0);
 		i++;
     }
 }
-
+void    print_stack(t_list *stack)
+{
+	while (stack)
+	{
+		printf ("%d\n", stack->content);
+		stack = stack->next;
+	}
+}
 int	main(int ac, char **av)
 {
 	t_list	*a;
@@ -119,6 +136,6 @@ int	main(int ac, char **av)
 		i++;
 	}
     rx_instructions(a, b);
-	// print_stack(a);
+	print_stack(a);
 	check_if_sorted(a, b);
 }

@@ -11,6 +11,7 @@ void	pushb (t_list **lst1, t_list **lst2)
 		top->next = NULL;
 		ft_lstadd_front (lst1 ,top);
 	}
+	// write (1, "pb\n", 3);
 }
 void	pusha (t_list **lst1, t_list **lst2)
 {
@@ -23,4 +24,5 @@ void	pusha (t_list **lst1, t_list **lst2)
 		top->next = NULL;
 		ft_lstadd_front (lst1 ,top);
 	}
+	// write (1, "pa\n", 3);
 }

@@ -12,6 +12,7 @@ void	swapb (t_list **lst)
 		(*lst)->next->content = (*lst)->content;
 		(*lst)->content = temp;
 	}
+	write (1, "sb\n", 3);
 }
 void	swapa (t_list **lst)
 {
@@ -25,6 +26,7 @@ void	swapa (t_list **lst)
 		(*lst)->next->content = (*lst)->content;
 		(*lst)->content = temp;
 	}
+	// write (1, "sa\n", 3);
 }
 void	swapboth (t_list **lst1, t_list **lst2)
 {
@@ -39,4 +41,5 @@ void	swapboth (t_list **lst1, t_list **lst2)
 		swapa (lst1);
 	if (size2 >= 2)
 		swapb (lst2);
+		// write (1, "ss\n", 3);
 }

@@ -12,7 +12,7 @@ void	swapb (t_list **lst)
 		(*lst)->next->content = (*lst)->content;
 		(*lst)->content = temp;
 	}
-	write (1, "sa\n", 3);
+	write (1, "sb\n", 3);
 }
 void	swapa (t_list **lst)
 {
