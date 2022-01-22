@@ -88,7 +88,7 @@ t_list	*getlastnode (t_list *a)
 	}
 }
 
-void	push_wanted (t_list **a, t_list **b, int wanted, int med, int i)
+void	push_wanted (t_list **a, t_list **b, int wanted, int med)
 {
 	int		pos;
 	int		size;
@@ -104,6 +104,7 @@ void	push_wanted (t_list **a, t_list **b, int wanted, int med, int i)
 		*b = (*b)->next;
 	}
 	*b = head;
+	size = ft_lstsize(*b);
 	bring_front_or_back (*b, pos, size, 'b');
 	pusha (a, b);
 }
@@ -163,7 +164,6 @@ void	put_back (t_list **a, t_list **b, int lastcon)
 {
 	t_list	*lastnode;
 	int		med;
-	int		i = 0;
 
 	lastnode = getlastnode(*a);
 	while (*b)
@@ -180,12 +180,11 @@ void	put_back (t_list **a, t_list **b, int lastcon)
 				rotatea (a);
 			}
 			else
-				push_wanted (a, b, (*a)->content - 1, med, i);
+				push_wanted (a, b, (*a)->content - 1, med);
 		}
 		else
 			rrotatea (a);
 		lastnode = getlastnode(*a);
-		i++;
 	}
 	put_contentback (a, lastcon);
 }

@@ -105,14 +105,14 @@ void    rx_instructions (t_list *a, t_list *b)
         inst = get_next_line (0);
     }
 }
-// void    print_stack(t_list *stack)
-// {
-// 	while (stack)
-// 	{
-// 		printf ("%d\n", stack->content);
-// 		stack = stack->next;
-// 	}
-// }
+void    print_stack(t_list *stack)
+{
+	while (stack)
+	{
+		printf ("%d\n", stack->content);
+		stack = stack->next;
+	}
+}
 int	main(int ac, char **av)
 {
 	t_list	*a;
@@ -130,5 +130,6 @@ int	main(int ac, char **av)
 		i++;
 	}
     rx_instructions(a, b);
+	print_stack(a);
 	check_if_sorted(a, b);
 }

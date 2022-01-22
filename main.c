@@ -190,5 +190,5 @@ int	main(int ac, char **av)
 		handle_5n4(&a, &b);
 	if (size > 5)
 		sort (a, b);
-	print_stack(a);
+	// print_stack(a);
 }
