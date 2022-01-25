@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/25 16:08:30 by marvin            #+#    #+#             */
+/*   Updated: 2022/01/25 16:08:30 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	put_contentback (t_list **head, int lastcon)
+void	put_contentback(t_list **head, int lastcon)
 {
 	t_list	*lastdup;
 	t_list	*prevhead;
@@ -12,13 +24,13 @@ void	put_contentback (t_list **head, int lastcon)
 		{
 			(*head)->content = lastcon;
 			*head = prevhead;
-			break;
+			break ;
 		}
 		*head = (*head)->next;
 	}
 }
 
-t_list	*ft_lstdup (t_list *a)
+t_list	*ft_lstdup(t_list *a)
 {
 	t_list	*dup;
 	t_list	*head;
@@ -33,7 +45,7 @@ t_list	*ft_lstdup (t_list *a)
 	return (dup);
 }
 
-t_list	*getlastnode (t_list *a)
+t_list	*getlastnode(t_list *a)
 {
 	while (a)
 	{

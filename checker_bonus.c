@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "get_next_line/get_next_line.h"
 
-int		is_int (char *str)
+int	is_int(char *str)
 {
 	int	i;
 	int	negative;
@@ -23,7 +23,7 @@ int		is_int (char *str)
 	if (str[i] == '-')
 		i++;
 	if (ft_atoi(str) > 2147483647
-	|| ft_atoi(str) < -2147483648)
+		|| ft_atoi(str) < -2147483648)
 		return (0);
 	while (str[i])
 	{
@@ -34,7 +34,7 @@ int		is_int (char *str)
 	return (1);
 }
 
-int	check (char **av)
+int	check(char **av)
 {
 	int	i;
 	int	j;
@@ -65,9 +65,6 @@ int	check (char **av)
 
 void	check_if_sorted(t_list *a, t_list *b)
 {
-	int	pos;
-
-	pos = 0;
 	while (a)
 	{
 		if (a->next && a->content > a->next->content)
@@ -75,7 +72,6 @@ void	check_if_sorted(t_list *a, t_list *b)
 			write (1, "KO\n", 3);
 			exit (1);
 		}
-		pos++;
 		a = a->next;
 	}
 	write (1, "OK\n", 3);
@@ -109,9 +105,6 @@ void	rx_instructions(t_list *a, t_list *b)
 		else if (!strncmp(inst, "ss\n", 2))
 			swapboth (&b, &a);
 		free (inst);
-		printf("-----staka----\n");
-		print_stack(a);
-		printf("-----staka----\n");
 		inst = get_next_line (0);
 	}
 }

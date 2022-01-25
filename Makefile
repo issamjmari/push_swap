@@ -1,6 +1,6 @@
 SRC = main.c pushto.c smallest.c utils.c list_utils.c \
 checker_utils.c rotate.c swapa.c sort.c libft.a
-B_SRC = checker_bonus.c pushto_bonus.c rotate_bonus.c swap_bonus.c checker_utils.c \
+B_SRC = checker_bonus.c pushto_bonus.c rotate_bonus.c swap_bonus.c \
 get_next_line/get_next_line.c get_next_line/get_next_line_utils_bonus.c libft.a
 BM_OBJ =  main.o pushto.o rotate.o swapa.o sort.o checker_bonus.o \
 libft.a get_next_line/get_next_line.o get_next_line/get_next_line_utils_bonus.o
