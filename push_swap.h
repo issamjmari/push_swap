@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 16:30:05 by marvin            #+#    #+#             */
-/*   Updated: 2022/01/25 16:31:44 by marvin           ###   ########.fr       */
+/*   Updated: 2022/01/25 20:35:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	sort(t_list *a, t_list *b);
 void	handle_5n4(t_list **a, t_list **b);
 void	print_stack(t_list *stack);
 int		smallest(t_list *stack);
+void	free_list(t_list *head);
 void	bring_front_or_back(t_list *stack, int wanted, int size, char c);
 #endif

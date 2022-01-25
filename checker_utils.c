@@ -32,3 +32,15 @@ int	is_int(char *str)
 	}
 	return (1);
 }
+
+void	free_list(t_list *head)
+{
+	t_list	*temp;
+
+	while (head)
+	{
+		temp = head->next;
+		free(head);
+		head = temp;
+	}
+}

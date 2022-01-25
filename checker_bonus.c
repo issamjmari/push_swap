@@ -118,8 +118,7 @@ int	main(int ac, char **av)
 
 	i = 2;
 	b = NULL;
-	if (!check(&av[1]))
-		exit(1);
+	check(&av[1]);
 	a = ft_lstnew (ft_atoi(av[1]));
 	while (av[i])
 	{

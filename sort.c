@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:32:19 by marvin            #+#    #+#             */
-/*   Updated: 2022/01/24 18:33:59 by marvin           ###   ########.fr       */
+/*   Updated: 2022/01/25 20:41:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	indexing(t_list *a)
 		dup = dup->next;
 		a = a->next;
 	}
-	a = ahead;
+	free_list (duphead);
 }
 
 void	push_wanted(t_list **a, t_list **b, int wanted, int med)

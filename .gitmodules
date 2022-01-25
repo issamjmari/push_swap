@@ -1,0 +1,3 @@
+[submodule "P_Libft"]
+	path = P_Libft
+	url = https://github.com/issamjmari/Push_Swap_Libft

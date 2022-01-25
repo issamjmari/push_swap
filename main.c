@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:31:58 by marvin            #+#    #+#             */
-/*   Updated: 2022/01/25 14:55:17 by marvin           ###   ########.fr       */
+/*   Updated: 2022/01/25 20:35:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,5 @@ int	main(int ac, char **av)
 		handle_5n4(&a, &b);
 	if (size > 5)
 		sort (a, b);
+	free_list (a);
 }
