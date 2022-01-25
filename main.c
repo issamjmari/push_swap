@@ -1,30 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 18:31:58 by marvin            #+#    #+#             */
+/*   Updated: 2022/01/25 14:55:17 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int		is_int (char *str)
+void	check(char **av)
 {
 	int	i;
-	int negative;
-
-	i = 0;
-	negative = 0;
-	if (str[i] == '-')
-		i++;
-	if (ft_atoi(str) > 2147483647
-	|| ft_atoi(str) < -2147483648)
-		return 0;
-	while (str[i])
-	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	check (char **av)
-{
-	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (av[i])
@@ -48,34 +39,7 @@ void	check (char **av)
 	}
 }
 
-void	handle_3 (t_list *a)
-{
-	if (a->content < a->next->content
-	&& a->next->content < a->next->next->content)
-		return ;
-	if (a->content < a->next->content
-	&& a->content < a->next->next->content)
-	{
-		swapa (&a);
-		rotatea (&a);
-	}
-	else if (a->content > a->next->content
-	&& a->content < a->next->next->content)
-		swapa (&a);
-	else if (a->content < a->next->content
-	&& a->content > a->next->next->content)
-		rrotatea (&a);
-	else if (a->content > a->next->content
-	&& a->next->content < a->next->next->content)
-		rotatea (&a);
-	else if (a->content > a->next->content
-	&& a->next->content > a->next->next->content)
-	{
-		swapa (&a);
-		rrotatea (&a);
-	}
-}
-void	bring_front_or_back (t_list *stack, int wanted, int size, char c)
+void	bring_front_or_back(t_list *stack, int wanted, int size, char c)
 {
 	int	med;
 
@@ -104,44 +68,38 @@ void	bring_front_or_back (t_list *stack, int wanted, int size, char c)
 	}
 }
 
-int	smallest_pos(t_list *stack)
+void	handle_3(t_list *a)
 {
-	int	position;
-	int	smallest;
-	int ret;
-
-	position = 0;
-	ret = 0;
-	smallest = stack->content;
-	while (stack)
+	if (a->content < a->next->content
+		&& a->next->content < a->next->next->content)
+		return ;
+	if (a->content < a->next->content
+		&& a->content < a->next->next->content)
 	{
-		if (stack->content < smallest) 
-		{
-			smallest = stack->content;
-			ret = position;
-		}
-		position++;
-		stack = stack->next;
+		swapa (&a);
+		rotatea (&a);
 	}
-	return (ret);
+	else if (a->content > a->next->content
+		&& a->content < a->next->next->content)
+		swapa (&a);
+	else if (a->content < a->next->content
+		&& a->content > a->next->next->content)
+		rrotatea (&a);
+	else if (a->content > a->next->content
+		&& a->next->content < a->next->next->content)
+		rotatea (&a);
+	else if (a->content > a->next->content
+		&& a->next->content > a->next->next->content)
+	{
+		swapa (&a);
+		rrotatea (&a);
+	}
 }
-int	smallest(t_list *stack)
+
+void	handle_5n4(t_list **a, t_list **b)
 {
 	int	smallest;
-
-	smallest = stack->content;
-	while (stack)
-	{
-		if (stack->content < smallest) 
-			smallest = stack->content;
-		stack = stack->next;
-	}
-	return (smallest);
-}
-void	handle_5n4 (t_list **a, t_list **b)
-{
-	int smallest;
-	int size;
+	int	size;
 
 	smallest = smallest_pos (*a);
 	size = ft_lstsize (*a);
@@ -190,5 +148,4 @@ int	main(int ac, char **av)
 		handle_5n4(&a, &b);
 	if (size > 5)
 		sort (a, b);
-	// print_stack(a);
 }

@@ -2,6 +2,17 @@
 # define PUSH_SWAP_H
 
 # include "Libft/libft.h" 
+void	put_contentback (t_list **head, int lastcon);
+int	    is_int(char *str);
+int	    smallest_pos(t_list *stack);
+int	    smallest(t_list *stack);
+t_list	*ft_lstdup (t_list *a);
+t_list	*getlastnode (t_list *a);
+int     put1 (t_list *head);
+int		is_there (int content, t_list *b);
+int		not_sorted (t_list *a);
+int	    current_pos (int size, int current, t_list *dup);
+int	    set_pos (t_list *a, int min, int max);
 int     smallest_pos(t_list *stack);
 void	rotatea(t_list **lst);
 void	rotateb(t_list **lst);

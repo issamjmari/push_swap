@@ -1,49 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 18:32:19 by marvin            #+#    #+#             */
+/*   Updated: 2022/01/24 18:33:59 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	set_pos (t_list *a, int min, int max)
-{
-	int	pos;
-
-	pos = 0;
-	while (a)
-	{
-		if (a->content >= min && a->content <= max)
-			return (pos);
-		pos++;
-		a = a->next;
-	}
-}
-int	current_pos (int size, int current, t_list *dup)
-{
-	int pos;
-
-	pos = 0;
-	while (dup)
-	{
-		if (dup->content >= current)
-			pos++;
-		dup = dup->next;
-	}
-	pos = size - pos;
-	return (pos);
-}
-
-t_list	*ft_lstdup (t_list *a)
-{
-	t_list	*dup;
-	t_list	*head;
-
-	dup = ft_lstnew (a->content);
-	a = a->next;
-	while (a)
-	{
-		ft_lstadd_back (&dup, ft_lstnew(a->content));
-		a = a->next;
-	}
-	return (dup);
-}
-
-void	indexing (t_list *a)
+void	indexing(t_list *a)
 {
 	t_list	*ahead;
 	t_list	*dup;
@@ -63,32 +32,7 @@ void	indexing (t_list *a)
 	a = ahead;
 }
 
-int	getpos (t_list *head, int a)
-{
-	int pos;
-
-	pos = 0;
-	while (head)
-	{
-		if (head->content == a)
-			return pos;
-		pos++;
-		head = head->next;
-	}
-	return 0;
-}
-
-t_list	*getlastnode (t_list *a)
-{
-	while (a)
-	{
-		if (!a->next)
-			return (a);
-		a = a->next;
-	}
-}
-
-void	push_wanted (t_list **a, t_list **b, int wanted, int med)
+void	push_wanted(t_list **a, t_list **b, int wanted, int med)
 {
 	int		pos;
 	int		size;
@@ -99,7 +43,7 @@ void	push_wanted (t_list **a, t_list **b, int wanted, int med)
 	while (*b)
 	{
 		if ((*b)->content == wanted)
-			break;
+			break ;
 		pos++;
 		*b = (*b)->next;
 	}
@@ -109,58 +53,7 @@ void	push_wanted (t_list **a, t_list **b, int wanted, int med)
 	pusha (a, b);
 }
 
-int		not_sorted (t_list *a)
-{
-	t_list	*head;
-	int pos;
-	int		sorted;
-
-	sorted = 1;
-	pos = 0;
-	head = a;
-	while (a->next)
-	{
-		if (a->content > a->next->content)
-		{
-			sorted = 0;
-			break;
-		}
-		pos++;
-		a = a->next;
-	}
-	return (sorted);
-}
-
-int		is_there (int content, t_list *b)
-{
-	while (b)
-	{
-		if (b->content == content)
-			return (1);
-		b = b->next;
-	}
-	return (0);
-}
-
-void	put_contentback (t_list **head, int lastcon)
-{
-	t_list	*lastdup;
-	t_list	*prevhead;
-
-	prevhead = *head;
-	while (*head)
-	{
-		if ((*head)->content == -1)
-		{
-			(*head)->content = lastcon;
-			*head = prevhead;
-			break;
-		}
-		*head = (*head)->next;
-	}
-}
-
-void	put_back (t_list **a, t_list **b, int lastcon)
+void	put_back(t_list **a, t_list **b, int lastcon)
 {
 	t_list	*lastnode;
 	int		med;
@@ -174,7 +67,7 @@ void	put_back (t_list **a, t_list **b, int lastcon)
 			if ((*b)->content == (*a)->content - 1)
 				pusha (a, b);
 			else if ((*b)->content < (*a)->content
-			&& (*b)->content > lastnode->content)
+				&& (*b)->content > lastnode->content)
 			{
 				pusha (a, b);
 				rotatea (a);
@@ -189,13 +82,13 @@ void	put_back (t_list **a, t_list **b, int lastcon)
 	put_contentback (a, lastcon);
 }
 
-void	push_elements (t_list **a, t_list **b)
+void	push_elements(t_list **a, t_list **b)
 {
-	int min;
-	int max;
-	int pushed;
-	int size;
-	int i;
+	int	min;
+	int	max;
+	int	pushed;
+	int	size;
+	int	i;
 
 	i = 0;
 	size = ft_lstsize(*a);
@@ -213,32 +106,10 @@ void	push_elements (t_list **a, t_list **b)
 	}
 }
 
-t_list	*put1 (t_list *head)
+void	sort(t_list *a, t_list *b)
 {
+	int		size;
 	t_list	*lastdup;
-	while (head)
-	{
-		if (head->next == NULL)
-		{
-			lastdup = ft_lstdup (head);
-			head->content = -1;
-		}
-		head = head->next;
-	}
-	return (lastdup);
-}
-void    print_stack(t_list *stack)
-{
-	while (stack)
-	{
-		printf ("%d\n", stack->content);
-		stack = stack->next;
-	}
-}
-void	sort (t_list *a, t_list *b)
-{
-	int size;
-	t_list *lastdup;
 
 	indexing (a);
 	size = ft_lstsize(a);
@@ -248,8 +119,7 @@ void	sort (t_list *a, t_list *b)
 		size = ft_lstsize(a);
 	}
 	handle_5n4 (&a, &b);
-	lastdup = put1 (a);
-	put_back (&a, &b, lastdup->content);
+	put_back (&a, &b, put1(a));
 	while (!not_sorted(a))
 		rrotatea(&a);
 }

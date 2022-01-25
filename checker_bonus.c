@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 18:34:37 by marvin            #+#    #+#             */
+/*   Updated: 2022/01/24 18:34:37 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include "get_next_line/get_next_line.h"
 
 int		is_int (char *str)
 {
 	int	i;
-	int negative;
+	int	negative;
 
 	i = 0;
 	negative = 0;
@@ -12,7 +24,7 @@ int		is_int (char *str)
 		i++;
 	if (ft_atoi(str) > 2147483647
 	|| ft_atoi(str) < -2147483648)
-		return 0;
+		return (0);
 	while (str[i])
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
@@ -22,10 +34,10 @@ int		is_int (char *str)
 	return (1);
 }
 
-void	check (char **av)
+int	check (char **av)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (av[i])
@@ -47,14 +59,15 @@ void	check (char **av)
 		}
 		i++;
 	}
+	if (i == 0)
+		return (0);
 }
 
-void	check_if_sorted (t_list *a, t_list *b)
+void	check_if_sorted(t_list *a, t_list *b)
 {
-	int pos;
+	int	pos;
 
 	pos = 0;
-	// print_stack(a);
 	while (a)
 	{
 		if (a->next && a->content > a->next->content)
@@ -67,52 +80,42 @@ void	check_if_sorted (t_list *a, t_list *b)
 	}
 	write (1, "OK\n", 3);
 }
-// void    print_stack(t_list *stack)
-// {
-// 	while (stack)
-// 	{
-// 		printf ("%d\n", stack->content);
-// 		stack = stack->next;
-// 	}
-// }
-void    rx_instructions (t_list *a, t_list *b)
-{
-    char    *inst;
 
-	int fd = open ("ch.txt", O_RDWR);
-    inst = get_next_line (0);
-    while (inst)
-    {
-        if (!strncmp(inst, "ra\n", 2))
-            rotatea (&a);
-        else if (!strncmp(inst, "rra\n", 3))
-            rrotatea (&a);
-        else if (!strncmp(inst, "rb\n", 2))
-            rotateb (&b);
-        else if (!strncmp(inst, "rrb\n", 3))
-            rrotateb (&b);
-        else if (!strncmp(inst, "sa\n", 2))
-            swapa (&a);
-        else if (!strncmp(inst, "sb\n", 2))
-            swapb (&b);
-        else if (!strncmp(inst, "pa\n", 2))
-            pusha (&a, &b);
-        else if (!strncmp(inst, "pb\n", 2))
-            pushb (&b, &a);
-        else if (!strncmp(inst, "ss\n", 2))
-            swapboth (&b, &a);
-		free (inst);
-        inst = get_next_line (0);
-    }
-}
-void    print_stack(t_list *stack)
+void	rx_instructions(t_list *a, t_list *b)
 {
-	while (stack)
+	char	*inst;
+	int		fd;
+
+	fd = open ("ch.txt", O_RDWR);
+	inst = get_next_line (0);
+	while (inst)
 	{
-		printf ("%d\n", stack->content);
-		stack = stack->next;
+		if (!strncmp(inst, "ra\n", 2))
+			rotatea (&a);
+		else if (!strncmp(inst, "rra\n", 3))
+			rrotatea (&a);
+		else if (!strncmp(inst, "rb\n", 2))
+			rotateb (&b);
+		else if (!strncmp(inst, "rrb\n", 3))
+			rrotateb (&b);
+		else if (!strncmp(inst, "sa\n", 2))
+			swapa (&a);
+		else if (!strncmp(inst, "sb\n", 2))
+			swapb (&b);
+		else if (!strncmp(inst, "pa\n", 2))
+			pusha (&a, &b);
+		else if (!strncmp(inst, "pb\n", 2))
+			pushb (&b, &a);
+		else if (!strncmp(inst, "ss\n", 2))
+			swapboth (&b, &a);
+		free (inst);
+		printf("-----staka----\n");
+		print_stack(a);
+		printf("-----staka----\n");
+		inst = get_next_line (0);
 	}
 }
+
 int	main(int ac, char **av)
 {
 	t_list	*a;
@@ -122,14 +125,14 @@ int	main(int ac, char **av)
 
 	i = 2;
 	b = NULL;
-	check (&av[1]);
+	if (!check(&av[1]))
+		exit(1);
 	a = ft_lstnew (ft_atoi(av[1]));
 	while (av[i])
 	{
 		ft_lstadd_back (&a, ft_lstnew(ft_atoi(av[i])));
 		i++;
 	}
-    rx_instructions(a, b);
-	print_stack(a);
+	rx_instructions(a, b);
 	check_if_sorted(a, b);
 }
